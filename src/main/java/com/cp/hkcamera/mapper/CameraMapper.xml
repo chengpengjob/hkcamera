@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cp.hkcamera.mapper.CameraMapper" >
+  <resultMap id="BaseResultMap" type="com.cp.hkcamera.model.Camera" >
+    <result column="cameraid" property="cameraid" jdbcType="INTEGER" />
+    <result column="cameraIndexCode" property="cameraindexcode" jdbcType="VARCHAR" />
+    <result column="recordLocation" property="recordlocation" jdbcType="VARCHAR" />
+    <result column="recordLocationName" property="recordlocationname" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="statusName" property="statusname" jdbcType="VARCHAR" />
+    <result column="cameraName" property="cameraname" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="findbycamera" resultMap="BaseResultMap" parameterType="com.cp.hkcamera.model.Camera">
+        SELECT * from camera where cameraId=#{cameraId}
+    </select>
+  <insert id="insert" parameterType="com.cp.hkcamera.model.Camera">
+    insert into camera (cameraid, cameraIndexCode, recordLocation,
+      recordLocationName, status, statusName,
+      cameraName)
+    values (#{cameraid,jdbcType=INTEGER}, #{cameraindexcode,jdbcType=VARCHAR}, #{recordlocation,jdbcType=VARCHAR},
+      #{recordlocationname,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{statusname,jdbcType=VARCHAR},
+      #{cameraname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cp.hkcamera.model.Camera" >
+    insert into camera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cameraid != null" >
+        cameraid,
+      </if>
+      <if test="cameraindexcode != null" >
+        cameraIndexCode,
+      </if>
+      <if test="recordlocation != null" >
+        recordLocation,
+      </if>
+      <if test="recordlocationname != null" >
+        recordLocationName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="statusname != null" >
+        statusName,
+      </if>
+      <if test="cameraname != null" >
+        cameraName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cameraid != null" >
+        #{cameraid,jdbcType=INTEGER},
+      </if>
+      <if test="cameraindexcode != null" >
+        #{cameraindexcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordlocation != null" >
+        #{recordlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="recordlocationname != null" >
+        #{recordlocationname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="statusname != null" >
+        #{statusname,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraname != null" >
+        #{cameraname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
